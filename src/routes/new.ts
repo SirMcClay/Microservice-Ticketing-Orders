@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 import express, { Request, Response } from 'express';
-import { requireAuth, validateRequest } from '@sirmctickets/commontickets';
+import {
+	NotFoundError,
+	requireAuth,
+	validateRequest,
+} from '@sirmctickets/commontickets';
 import { body } from 'express-validator';
 import { Ticket } from '../models/ticket';
 import { Order } from '../models/order';
@@ -19,7 +23,13 @@ router.post(
 	],
 	validateRequest,
 	async (req: Request, res: Response) => {
+		const { ticketId } = req.body;
+
 		// Find the ticket the user is trying to order in the database
+		const ticket = await Ticket.findById(ticketId);
+		if (!ticket) {
+			throw new NotFoundError();
+		}
 
 		// Make sure that this ticket is not already reserved
 
