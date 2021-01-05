@@ -46,6 +46,13 @@ router.post(
 		expiration.setSeconds(expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS);
 
 		// Build the order and save is to the database
+		const order = Order.build({
+			userId: req.currentUser!.id,
+			status: OrderStatus.Created,
+			expiresAt: expiration,
+			ticket,
+		});
+		await order.save();
 
 		// Publish an event saying that an order was created
 
