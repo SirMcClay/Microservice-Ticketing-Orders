@@ -55,10 +55,11 @@ ticketSchema.statics.findByEvent = (event: { id: string; version: number }) => {
 	});
 };
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
-	const { id, ...rest } = attrs;
+	// const { id, ...rest } = attrs;
 	return new Ticket({
-		_id: id,
-		...rest,
+		_id: attrs.id,
+		title: attrs.title,
+		price: attrs.price,
 	});
 };
 ticketSchema.methods.isReserved = async function () {
