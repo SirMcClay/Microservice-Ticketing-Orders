@@ -40,7 +40,7 @@ const setup = async () => {
 };
 
 it('updates the order status to cancelled', async () => {
-	const { listener, order, ticket, data, msg } = await setup();
+	const { listener, order, data, msg } = await setup();
 
 	await listener.onMessage(data, msg);
 
@@ -50,7 +50,7 @@ it('updates the order status to cancelled', async () => {
 });
 
 it('emit an OrderCancelled event', async () => {
-	const { listener, order, ticket, data, msg } = await setup();
+	const { listener, order, data, msg } = await setup();
 
 	await listener.onMessage(data, msg);
 
@@ -63,7 +63,7 @@ it('emit an OrderCancelled event', async () => {
 });
 
 it('ack the message', async () => {
-	const { listener, order, ticket, data, msg } = await setup();
+	const { listener, data, msg } = await setup();
 
 	await listener.onMessage(data, msg);
 
