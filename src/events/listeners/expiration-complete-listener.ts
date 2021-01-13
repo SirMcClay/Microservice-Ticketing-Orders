@@ -22,5 +22,6 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
 		order.set({
 			status: OrderStatus.Cancelled,
 		});
+		await order.save();
 	}
 }
